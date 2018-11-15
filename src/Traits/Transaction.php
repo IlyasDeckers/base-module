@@ -38,4 +38,17 @@ trait Transaction
 
         return $response;
     }
+
+    /**
+     * Check if the method exists.
+     *
+     * @param string $method
+     * @return Exeption
+     */
+    private function methodExists(string $method)
+    {
+        if (!method_exists($this, $method)) {
+            throw new Exception("Method doesn't exist");
+        }
+    }
 }
