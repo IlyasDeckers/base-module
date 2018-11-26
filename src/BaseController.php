@@ -46,16 +46,6 @@ class BaseController extends Controller
      */
     public function index(Request $request) : object
     {
-        // $u = \Clockwork\Contracts\Models\Contract::scopes(['active'])->with(['customer', 'user'])->get();
-        // $result = [];
-        // foreach ($u as $x) {
-        //     $result[] = [
-        //         'name' => $x->user->name,
-        //         'function' => $x->function,
-        //         'customer' => $x->customer->name
-        //     ];
-        // }
-        // return $result;
         return $this->resource::collection(
             $this->model->getAll($request)
         );

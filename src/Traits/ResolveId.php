@@ -1,11 +1,8 @@
 <?php
 namespace Clockwork\Base\Traits;
 
-<<<<<<< HEAD
 use Auth;
 
-=======
->>>>>>> implement editable & resolveid traits
 trait ResolveId
 {
     /**

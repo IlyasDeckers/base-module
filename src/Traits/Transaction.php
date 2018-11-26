@@ -48,7 +48,7 @@ trait Transaction
     private function methodExists(string $method)
     {
         if (!method_exists($this, $method)) {
-            throw new Exception("Method doesn't exist");
+            throw new Exception("Method '{$method}' doesn't exist");
         }
     }
 }

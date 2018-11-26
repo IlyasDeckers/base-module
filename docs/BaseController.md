@@ -1,15 +1,27 @@
 # BaseController
 ## Introduction
 The base controller is used as a starting point for all your controllers. The base controller extends `use Clockwork\Http\Controllers\Controller`.
+
+When implementing the BaseController it is important to create a constructor method on your Controller. This constructor contains a type hinted interface and the model's API resource.
+
 ## Usage
 ### `$model`
-The model gets set in the base controller's constructor. This model is an interface that is implemented by the repositories to access your models.
+The model gets set in the base controller's constructor. This model is an interface that is implemented by the repository to access your eloquent methods. The interface is type hinted in the controller's constructor that implements the `BaseController`. 
+
+Read more about repositories
+
+https://laravel.com/docs/5.7/container#automatic-injection
+https://medium.com/@jsdecena/refactor-the-simple-tdd-in-laravel-a92dd48f2cdd
+https://medium.com/employbl/use-the-repository-design-pattern-in-a-laravel-application-13f0b46a3dce
 
 ### `$resource`
-The API resource the controller must use. This resource is defined in the controller's constructor.
+The API resource the controller must use. This resource is defined in the controller's constructor. 
+
+> An API resource must be used for formating your API responses. Resources. These resources can be found/created in `Clockwork\ModuleName\Http\Resources`
 
 ### `$request`
 WIP
+
 `$request` contains all validation rules for the controller implementing the `BaseController`.
 
 ### Example usage
