@@ -148,9 +148,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     protected $model;
   
     /**
-     * InvoiceRepository constructor.
+     * UserRepository constructor.
      * 
-     * @param Fine $invoice
+     * @param User $invoice
      */
     public function __construct(User $user)
     {
@@ -158,7 +158,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
     /**
-     * Store a user 
+     * Get all users 
      * 
      * @param array $attributes
      * @return mixed
@@ -169,7 +169,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
     /**
-     * Store a user 
+     * Find a user 
      * 
      * @param array $attributes
      * @return mixed
