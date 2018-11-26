@@ -92,6 +92,8 @@ These methods return valid JSON responses using Laravel's resource classes to al
 ```
 #### Repositories
 Repositories are used to create methods that are reusable in the other parts of the application by doing Dependency Injection (DI). In this implementation of repositories we create an abstraction layer between our Controllers and Models, to extend and/or modify (eloquent) models.
+
+The `BaseRepository` is used as a starting point for all repositories. This enables us to create and reuse methods shared by all repositories in our application.
 ```
 +--------------+           +----------------+
 |              |  extends  |                |
@@ -99,13 +101,128 @@ Repositories are used to create methods that are reusable in the other parts of 
 |              |           |                |
 +--------------+           +----------------+
 ```
-Repositories are bound to their interfaces as a contract in the `ModuleProvider.php`
+##### Registering repositories
+Repositories are bound to their interfaces as a contract in the Service Provider e.g. `ModuleProvider.php`
 ```php
     $this->app->bind(
         ModuleRepositoryInterface::class,
         Modulepository::class
     );
 ```
+##### Database Transactions
+Database transactions are applied on our queries by implementing the `Transactions` trait. When an (unhandled) exception occurs during one of the database queries the query is rolled back to prevent data corruption. To implement these transactions you must use `Transactions.php` on your repositories. When using this Trait you should be aware that the methods that you would like to use database transactions on should be of the type `private`. When omnitting the transactions you should define your methods as `public`.
+```php
+    public function __call(string $method, array $args)
+    {
+        try {
+            DB::beginTransaction();
+            // Check if the method exists on the class this trait 
+            // has been implemented in. Next we call this function.
+            $this->methodExists($method);
+            $response = call_user_func_array([$this, $method], $args);
+            DB::commit();
+        } catch (Exception $e) {
+            // If the method call throws an exception rollback the 
+            // database queries and format the exception.
+            DB::rollback();
+            throw new Exception($e->getMessage());
+        }
+
+        return $response;
+    }
+```
+##### Repository example
+```php
+<?php
+namespace Clockwork\Users\Repositories;
+
+use Clockwork\Users\Models\User;
+use Clockwork\Base\BaseRepository;
+use Clockwork\Base\Traits\Transaction;
+use Clockwork\Users\Interfaces\UserRepositoryInterface;
+
+class UserRepository extends BaseRepository implements UserRepositoryInterface
+{
+    use Transaction;
+
+    protected $model;
+  
+    /**
+     * InvoiceRepository constructor.
+     * 
+     * @param Fine $invoice
+     */
+    public function __construct(User $user)
+    {
+        $this->model = $user;
+    }
+
+    /**
+     * Store a user 
+     * 
+     * @param array $attributes
+     * @return mixed
+     */
+    private function getAll(object $request) : object
+    {
+        parrent::getAll($request)
+    }
+
+    /**
+     * Store a user 
+     * 
+     * @param array $attributes
+     * @return mixed
+     */
+    private function find(object $request) : object
+    {
+        parrent::find($request)
+    }
+
+    /**
+     * Store a user 
+     * 
+     * @param array $attributes
+     * @return mixed
+     */
+    private function store(object $request) : object
+    {
+        // store logic here
+        return $this->itemResponse(
+            $request,
+            $this->model->where('id', $result->id)
+        );
+    }
+
+    /**
+     * Update a purchase
+     *
+     * @param object $request
+     * @return void
+     */
+    private function update(object $request) : object
+    {
+        // update logic here
+        return $this->itemResponse(
+            $request,
+            $this->model->where('id', $request->id) // or $updated->refresh()
+        );
+    }
+
+    /**
+     * Delete an invoice
+     *
+     * @param integer $id
+     * @return void
+     */
+    private function delete(int $id) : object
+    {
+        // No default logic
+        return;
+    }
+}
+```
+##### Using repositories
 To use a repository you can inject the interface into you controller's interface. By doing this the `ModuleRepository.php` can access the repository and therefore the appropriate model to interact with the database.
 ```php
     public function __construct(ModuleRepositoryInterface $module)
@@ -127,4 +244,5 @@ Accessible methods are:
 * paginate
 * sort
 * search
+
 #### Models
