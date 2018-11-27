@@ -1,4 +1,8 @@
 # BaseModule
+1. Introduction
+2. Installation
+3. Usage
+
 ## Introduction
 When Implementing this BaseModule you will be using the repository pattern heavily. Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
 
@@ -89,6 +93,33 @@ These methods return valid JSON responses using Laravel's resource classes to al
         $this->resource = '\Clockwork\Users\Http\Resources\UserResource';
         ...
     }
+```
+##### Request validation
+To implement request validations on your controllers, simply add an array with the method names as the key and the request class as value. If no validation is required on on of the controller's methods you can define the validation class as null in the `$rules` array.
+```php
+    protected $rules = [
+        'update' => UpdateRequest::class,
+        'create' => null,
+    ];
+```
+In the request class we define our rules as a normal laravel request class. These rules are resolved in our BaseController and applied accordingly. 
+
+```php
+class UpdateRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ];
+    }
+}
 ```
 #### Repositories
 Repositories are used to create methods that are reusable in the other parts of the application by doing Dependency Injection (DI). In this implementation of repositories we create an abstraction layer between our Controllers and Models, to extend and/or modify (eloquent) models.
