@@ -102,7 +102,7 @@ To implement request validations on your controllers, simply add an array with t
         'create' => null,
     ];
 ```
-In the request class we define our rules as a normal laravel request class. These rules are resolved in our BaseController and applied accordingly. 
+In the request class we define our rules as a normal laravel request class. These rules are resolved in our BaseController and applied accordingly.
 
 ```php
 class UpdateRequest
@@ -120,6 +120,19 @@ class UpdateRequest
         ];
     }
 }
+```
+
+The logic handling the validations is handled by the `ValidatesRequests` trait. Where the validator method handles our validation implementation.
+
+```php
+    public function validator(string $function, object $request)
+    {
+        if (isset($this->rules[$function]) && !is_null($this->rules[$function])) {
+            $this->validate($request,
+                (new $this->rules[$function])->rules()
+            );
+        }
+    }
 ```
 #### Repositories
 Repositories are used to create methods that are reusable in the other parts of the application by doing Dependency Injection (DI). In this implementation of repositories we create an abstraction layer between our Controllers and Models, to extend and/or modify (eloquent) models.
