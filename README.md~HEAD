@@ -1,4 +1,8 @@
 # BaseModule
+1. Introduction
+2. Installation
+3. Usage
+
 ## Introduction
 When Implementing this BaseModule you will be using the repository pattern heavily. Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
 
@@ -32,8 +36,9 @@ The whole implementation looks like this:
 +--------------+
 ```
 ## Installation
+WIP, not yet published.
 ```sh
-composer require 3d-ict/base-module
+composer require ilyasdeckers/base-module
 ```
 
 ## Usage
@@ -88,6 +93,46 @@ These methods return valid JSON responses using Laravel's resource classes to al
         ...
         $this->resource = '\Clockwork\Users\Http\Resources\UserResource';
         ...
+    }
+```
+##### Request validation
+To implement request validations on your controllers, simply add an array with the method names as the key and the request class as value. If no validation is required on on of the controller's methods you can define the validation class as null in the `$rules` array.
+```php
+    protected $rules = [
+        'update' => UpdateRequest::class,
+        'create' => null,
+    ];
+```
+In the request class we define our rules as a normal laravel request class. These rules are resolved in our BaseController and applied accordingly.
+
+```php
+class UpdateRequest
+{
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ];
+    }
+}
+```
+
+The logic handling the validations is handled by the `ValidatesRequests` trait. Where the validator method handles our validation implementation.
+
+```php
+    public function validator(string $function, object $request)
+    {
+        if (isset($this->rules[$function]) && !is_null($this->rules[$function])) {
+            $this->validate($request,
+                (new $this->rules[$function])->rules()
+            );
+        }
     }
 ```
 #### Repositories
@@ -195,7 +240,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 
     /**
-     * Update a purchase
+     * Update a user
      *
      * @param object $request
      * @return void
