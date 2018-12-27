@@ -1,0 +1,38 @@
+{
+    "name": "3d-ict/base-module",
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "Ilyas Deckers",
+            "email": "ilyas.deckers@3d-ict.be"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Clockwork\\Base\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "require": {
+        "php": ">=7.2.0",
+        "illuminate/support": "^5.7",
+        "barryvdh/laravel-cors": "^0.11.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "laravel/passport": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Clockwork\\Base\\Providers\\AuthServiceProvider",
+                "Clockwork\\Base\\Providers\\MacroServiceProvider"
+            ]
+        }
+    }
+}
