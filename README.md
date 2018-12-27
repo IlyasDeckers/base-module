@@ -36,8 +36,9 @@ The whole implementation looks like this:
 +--------------+
 ```
 ## Installation
+WIP, not yet published.
 ```sh
-composer require 3d-ict/base-module
+composer require ilyasdeckers/base-module
 ```
 
 ## Usage
