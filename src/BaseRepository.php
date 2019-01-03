@@ -115,7 +115,7 @@ abstract class BaseRepository
         $decoded = json_decode($this->request->scopes, true);
 
         if (json_last_error() == JSON_ERROR_NONE) {
-            dd($decoded);
+            dd($decoded); // If you encounter this line, open a issue and provide the output please :)
             $scopes = $decoded;
         } elseif (!is_object($decoded) && !is_array($decoded)) {
             $scopes = explode(',', $this->request->scopes);
