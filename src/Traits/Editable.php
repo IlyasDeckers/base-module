@@ -24,11 +24,24 @@ trait Editable {
 
             if($hasVariable !== false) {
                 $this->query[$field] = str_replace(
-                    $toReplace, 
-                    $this->purchase[$fieldName], 
+                    $toReplace,
+                    $this->setFieldName($fieldName),
                     $this->query[$field]
                 );
-              } 
+            } 
         });
+    }
+
+    private function setFieldName($fieldName)
+    {
+        if ($fieldName === 'total_ex') {
+            $result = $this->purchase['total'];
+        } elseif ($fieldName === 'total_inc') {
+            $result = $this->purchase->total_incl;
+        } else {
+            $result = $this->purchase[$fieldName];
+        }
+
+        return $result;
     }
 }
