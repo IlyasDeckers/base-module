@@ -35,11 +35,13 @@ trait Editable {
     private function setFieldName($fieldName)
     {
         if ($fieldName === 'total_ex') {
-            $result = $this->purchase['total'];
+            $result = $this->purchase->total;
         } elseif ($fieldName === 'total_inc') {
             $result = $this->purchase->total_incl;
+        } elseif ($fieldName === 'name') {
+            $result = $this->purchase->user->name;
         } else {
-            $result = $this->purchase[$fieldName];
+            $result = $this->purchase->$fieldName;
         }
 
         return $result;
