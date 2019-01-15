@@ -18,3 +18,15 @@ Route::middleware('api')
         Route::post('oauth/reset', 'ResetController@reset');
     }
 );
+
+Route::middleware('api')
+    ->prefix('api/v2/')
+    ->namespace('Clockwork\Base\Auth\Http\Controllers')
+    ->group(function () {
+        Route::get('/roles', 'RoleController@index');
+        Route::get('/roles/{id}', 'RoleController@show');
+
+        Route::get('/permissions', 'PermissionController@index');
+        Route::put('/acl/{id}', 'AclController@assignPermissions');
+    }
+);
