@@ -27,7 +27,7 @@ class AuthController extends BaseController
      */
     public function login(Request $request)
     {
-        $user = User::where('email', $request->email)->first();
+        $user = User::with(['roles.permissions', 'permissions'])->where('email', $request->email)->first();
         
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->fireLockoutEvent($request);
@@ -55,8 +55,11 @@ class AuthController extends BaseController
 
     public function hello(Request $request)
     {
+        $user = User::with(['roles.permissions', 'permissions'])
+            ->findOrFail($request->user()->id);
+
         return response()->json([
-            'user' => $request->user()->toArray(),
+            'user' => $user->toArray(),
             'venice' => config('venice.config'),
         ]);
     }
