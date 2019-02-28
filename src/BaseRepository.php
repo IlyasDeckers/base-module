@@ -77,7 +77,12 @@ abstract class BaseRepository
                 /* else */ [$this, 'noSort']
             );
 
-        return $query->get();
+        if ($request->paginate == 'true') {
+            return $query->paginate($request->per_page);
+        }
+
+        return $query->get()
+            ->when($request->has('groupBy'), [$this, 'groupBy']);
     }
 
     /**
@@ -151,5 +156,10 @@ abstract class BaseRepository
     public function noSort(Builder $query) 
     {
         return $query->orderBy('id', 'asc');
+    }
+
+    public function groupBy($query) 
+    {
+        return $query->groupBy($this->request->groupBy);
     }
 }
