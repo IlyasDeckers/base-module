@@ -11,6 +11,8 @@ trait Editable {
         foreach ($this->variables as $variable) {
             $this->replace($fields, $variable);
         }
+
+        // dd($this->query->message);
     }
 
     private function replace($fields, $variable)
@@ -39,7 +41,11 @@ trait Editable {
         } elseif ($fieldName === 'total_inc') {
             $result = $this->purchase->total_incl;
         } elseif ($fieldName === 'name') {
-            $result = $this->purchase->user->name;
+            $result = $this->purchase->timesheet->user->name;
+        } elseif ($fieldName === 'customer') {
+            $result = $this->purchase->timesheet->customer->name;
+        } elseif ($fieldName === 'hours') {
+            $result = $this->purchase->hours;
         } else {
             $result = $this->purchase->$fieldName;
         }
