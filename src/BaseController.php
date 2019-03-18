@@ -4,6 +4,7 @@ namespace Clockwork\Base;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use \Illuminate\Database\Eloquent\Collection;
 use Clockwork\Base\Traits\Validator;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
