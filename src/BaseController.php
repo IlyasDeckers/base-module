@@ -9,7 +9,7 @@ use Clockwork\Base\Traits\Validator;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
     use AuthorizesRequests, 
         DispatchesJobs, 
@@ -85,7 +85,7 @@ class BaseController extends Controller
             return $this->resource::collection($result);
         }
 
-        // Return   an item.
+        // Return an item.
         return new $this->resource($result);
     }
 
