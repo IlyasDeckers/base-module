@@ -16,6 +16,9 @@ class BaseServiceProvider extends ServiceProvider
     {
         $viewPath = __DIR__.'/../resources/views';
         $this->loadViewsFrom($viewPath, 'test-factory-helper');
+
+        // Load migrations
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 
     /**
