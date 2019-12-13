@@ -18,12 +18,13 @@
     },
     "require": {
         "php": ">=7.2.0",
-        "illuminate/support": "^5.0",
+        "illuminate/support": "^6.0",
         "barryvdh/laravel-cors": "^0.11.0",
         "guzzlehttp/guzzle": "^6.3",
-        "laravel/passport": "^5.0",
-        "owen-it/laravel-auditing": "^8.0",
-        "spatie/laravel-permission": "^2.29"
+        "laravel/passport": "^8.0",
+        "owen-it/laravel-auditing": "^9.0",
+        "spatie/laravel-permission": "^3.0",
+        "illuminate/config": "^6.0."
     },
     "require-dev": {
         "phpunit/phpunit": "~7.0"
@@ -33,7 +34,8 @@
             "providers": [
                 "Clockwork\\Base\\Providers\\AuthServiceProvider",
                 "Clockwork\\Base\\Providers\\MacroServiceProvider",
-                "Clockwork\\Base\\Providers\\BaseServiceProvider"
+                "Clockwork\\Base\\Providers\\BaseServiceProvider",
+                "Clockwork\\Base\\Config\\ConfigServiceProvider"
             ]
         }
     }
