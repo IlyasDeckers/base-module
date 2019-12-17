@@ -4,6 +4,7 @@ namespace Clockwork\Base\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Clockwork\Base\Console\Commands\GenerateFactoriesCommand;
+use Clockwork\Base\TransactionMiddleware;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,9 @@ class BaseServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $router = $this->app['router'];
+        $router->aliasMiddleware('transaction', TransactionMiddleware::class);
+
         $viewPath = __DIR__.'/../resources/views';
         $this->loadViewsFrom($viewPath, 'test-factory-helper');
 

@@ -5,11 +5,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Clockwork\Base\Traits\Transaction;
 
-abstract class BaseRepository
+abstract class BaseRepository implements BaseRepositoryInterface
 {
-    use Transaction;
+    protected object $request;
 
-    protected $request;
+    abstract public function store(object $request) : object;
+
+    abstract public function update(object $request)  : object;
+
+    abstract public function destroy(int $id) : object;
 
     /**
      * Get a item from the database
@@ -17,7 +21,7 @@ abstract class BaseRepository
      * @param object $request
      * @return item
      */
-    public function find(object $request)
+    public function find(object $request) : object
     {
         return $this->itemResponse(
             $request,
@@ -31,7 +35,7 @@ abstract class BaseRepository
      * @param object $request
      * @return collection
      */
-    public function getAll(object $request) 
+    public function getAll(object $request) : object  
     {
         return $this->collectionResponse(
             $request,

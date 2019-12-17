@@ -3,5 +3,7 @@ namespace Clockwork\Base;
 
 interface BaseRepositoryInterface
 {
-    // Deprecated ??
+    public function find(object $request);
+
+    public function getAll(object $request);
 }

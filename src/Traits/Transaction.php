@@ -4,6 +4,7 @@ namespace Clockwork\Base\Traits;
 use DB;
 use Exception;
 
+// Soon to be deprecated
 trait Transaction
 {
     /**
@@ -35,6 +36,14 @@ trait Transaction
             DB::rollback();
             throw new Exception($e->getMessage());
         }
+
+        // Check if the method exists on the class this trait 
+        // has been implemented in. Next we call this function.
+        if (!method_exists($this, $method)) {
+            throw new Exception("Method '{$method}' doesn't exist");
+        }
+
+        $response = call_user_func_array([$this, $method], $args);
 
         return $response;
     }
