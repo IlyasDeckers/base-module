@@ -5,6 +5,7 @@ namespace Clockwork\Base\Providers;
 use Illuminate\Support\ServiceProvider;
 use Clockwork\Base\Console\Commands\GenerateFactoriesCommand;
 use Clockwork\Base\TransactionMiddleware;
+use Clockwork\Base\ValidatorMiddleware;
 
 class BaseServiceProvider extends ServiceProvider
 {
@@ -17,6 +18,9 @@ class BaseServiceProvider extends ServiceProvider
     {
         $router = $this->app['router'];
         $router->aliasMiddleware('transaction', TransactionMiddleware::class);
+        $router->aliasMiddleware('validator', ValidatorMiddleware::class);
+
+        // $router->pushMiddlewareToGroup('api', ValidatorMiddleware::class);
 
         $viewPath = __DIR__.'/../resources/views';
         $this->loadViewsFrom($viewPath, 'test-factory-helper');

@@ -10,8 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class TransactionMiddleware
 {
     /**
-     * Apply database transactions on POST, PUT and DELETE
-     * requests.
+     * Apply database transactions on POST, PUT and DELETE requests.
      *
      * @param Request $method
      * @param Closure $next

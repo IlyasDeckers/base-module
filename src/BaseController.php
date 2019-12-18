@@ -2,19 +2,15 @@
 namespace Clockwork\Base;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use \Illuminate\Database\Eloquent\Collection;
-use Clockwork\Base\Traits\Validator;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
 abstract class BaseController extends Controller
 {
     use AuthorizesRequests, 
-        DispatchesJobs, 
-        ValidatesRequests,
-        Validator;
+        DispatchesJobs;
 
     /**
      * Model being used by the controller
@@ -73,19 +69,12 @@ abstract class BaseController extends Controller
      */
     public function store(Request $request) : object
     {
-        // Validate the incomming request
-        $this->validator(__FUNCTION__, $request);
-
-        // Store the resource
         $result = $this->model->store($request);
 
-        // Check if the result is an instance  of Collection. 
         if ($result instanceof Collection) {
-            // Return a collection resource.
             return $this->resource::collection($result);
         }
 
-        // Return an item.
         return new $this->resource($result);
     }
 
@@ -97,10 +86,6 @@ abstract class BaseController extends Controller
      */
     public function update(Request $request) : object
     {
-        // Validate the incomming request.
-        $this->validator(__FUNCTION__, $request);
-
-        // Update model and return the updated model.
         return new $this->resource(
             $this->model->update($request)
         );
@@ -115,5 +100,10 @@ abstract class BaseController extends Controller
     public function destroy(int $id)
     {
         $this->model->destroy($id);
+    }
+
+    public function getRules() : array
+    {
+        return $this->rules;
     }
 }
