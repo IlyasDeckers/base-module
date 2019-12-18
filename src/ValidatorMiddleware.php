@@ -26,8 +26,12 @@ class ValidatorMiddleware
         if ($request->isMethod('post') || $request->isMethod('put')) {
             $controller = Route::current()->controller;
 
-            if (method_exists($controller,'getRules')) {
-                $this->validator($controller->getRules(), 'update', $request);
+            if (method_exists($controller, 'getRules')) {
+                $function = explode('@',$request->route()->getActionName())[1];
+                
+                $request->validated = $this->validator(
+                    $controller->getRules(), $function, $request
+                );
             }
         }
 
@@ -41,7 +45,7 @@ class ValidatorMiddleware
      * @param object $request
      * @return void
      */
-    private function validator($rules, string $function, object $request)
+    private function validator($rules, string $function, Request $request)
     {
         if (isset($rules[$function]) && !is_null($rules[$function])) {
             return $this->validate($request,

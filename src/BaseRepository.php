@@ -4,6 +4,7 @@ namespace Clockwork\Base;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Clockwork\Base\Traits\Transaction;
+use Illuminate\Http\Request;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {
@@ -21,7 +22,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param object $request
      * @return item
      */
-    public function find(object $request) : object
+    public function find(Request $request) : object
     {
         return $this->itemResponse(
             $request,
@@ -35,7 +36,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param object $request
      * @return collection
      */
-    public function getAll(object $request) : object  
+    public function getAll(Request $request) : object  
     {
         return $this->collectionResponse(
             $request,
@@ -50,7 +51,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param [type] $query
      * @return collection
      */
-    public function itemResponse(object $request, object $query) 
+    public function itemResponse(Request $request, object $query) 
     {
         $this->request = $request;
 
@@ -67,7 +68,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param object $query
      * @return collection
      */
-    public function collectionResponse(object $request, object $query) 
+    public function collectionResponse(Request $request, object $query) 
     {
         $this->request = $request;
 

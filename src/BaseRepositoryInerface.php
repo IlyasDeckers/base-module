@@ -1,9 +1,11 @@
 <?php
 namespace Clockwork\Base;
 
+use Illuminate\Http\Request;
+
 interface BaseRepositoryInterface
 {
-    public function find(object $request);
+    // public function find(Request $request);
 
-    public function getAll(object $request);
+    // public function getAll(Request $request);
 }
