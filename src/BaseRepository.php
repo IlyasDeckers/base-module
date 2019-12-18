@@ -13,7 +13,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     abstract public function update(object $request)  : object;
 
-    abstract public function destroy(int $id) : object;
+    abstract public function destroy(int $id) : void;
 
     /**
      * Get a item from the database
