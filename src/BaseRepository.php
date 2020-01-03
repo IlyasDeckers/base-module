@@ -10,9 +10,9 @@ abstract class BaseRepository implements BaseRepositoryInterface
 {
     protected object $request;
 
-    abstract public function store(object $request) : object;
+    abstract public function store(Request $request) : object;
 
-    abstract public function update(object $request)  : object;
+    abstract public function update(Request $request)  : object;
 
     abstract public function destroy(int $id) : void;
 
