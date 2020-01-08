@@ -6,11 +6,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use \Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\Resource;
 
 abstract class BaseController extends Controller
 {
-    use AuthorizesRequests, 
-        DispatchesJobs;
+    use AuthorizesRequests;
 
     /**
      * Model being used by the controller
@@ -34,7 +34,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $rules = [];
+    protected array $rules = [];
 
     /**
      * Display a listing of the resource.
@@ -87,7 +87,7 @@ abstract class BaseController extends Controller
     public function update(Request $request) : object
     {
         return new $this->resource(
-            $this->model->update($request)
+            $this->model->update($request->validated)
         );
     }
 
