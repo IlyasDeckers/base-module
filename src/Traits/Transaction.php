@@ -4,7 +4,7 @@ namespace Clockwork\Base\Traits;
 use DB;
 use Exception;
 
-// Soon to be deprecated
+// deprecated
 trait Transaction
 {
     /**
