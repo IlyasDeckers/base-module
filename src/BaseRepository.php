@@ -3,6 +3,7 @@ namespace Clockwork\Base;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Clockwork\Base\Traits\Transaction;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
 
     abstract public function store(Request $request) : object;
 
-    abstract public function update(Request $request)  : object;
+    abstract public function update(array $data)  : object;
 
     abstract public function destroy(int $id) : void;
 
@@ -36,8 +37,8 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param object $request
      * @return collection
      */
-    public function getAll(Request $request) : object  
-    {
+    public function getAll(Request $request) : Collection  
+    {   
         return $this->collectionResponse(
             $request,
             $this->model
@@ -51,7 +52,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param [type] $query
      * @return collection
      */
-    public function itemResponse(Request $request, object $query) 
+    public function itemResponse(Request $request, object $query) : object
     {
         $this->request = $request;
 
@@ -68,7 +69,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param object $query
      * @return collection
      */
-    public function collectionResponse(Request $request, object $query) 
+    public function collectionResponse(Request $request, object $query) : Collection
     {
         $this->request = $request;
 
@@ -96,7 +97,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function filter(Builder $query) 
+    public function filter(Builder $query) : Builder
     {
         return $query->search($this->request->filter);
     }
@@ -107,7 +108,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function with(Builder $query) 
+    public function with(Builder $query) : Builder
     {
         return $query->with(
             explode(',', $this->request->with)
@@ -120,7 +121,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopes(Builder $query) 
+    public function scopes(Builder $query) : Builder
     {
         $decoded = json_decode($this->request->scopes, true);
 
@@ -142,7 +143,7 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function sort(Builder $query) 
+    public function sort(Builder $query) : Builder
     {
         foreach (explode(',', $this->request->sort) as $sort) {
             list($sortCol, $sortDir) = explode('|', $sort);
@@ -158,12 +159,18 @@ abstract class BaseRepository implements BaseRepositoryInterface
      * @param Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function noSort(Builder $query) 
+    public function noSort(Builder $query) : Builder
     {
         return $query->orderBy('id', 'asc');
     }
 
-    public function groupBy($query) 
+    /**
+     * GroupBy
+     * 
+     * @param Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function groupBy(Builder $query) : Builder
     {
         return $query->groupBy($this->request->groupBy);
     }
