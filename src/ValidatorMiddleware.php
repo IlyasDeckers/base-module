@@ -28,10 +28,14 @@ class ValidatorMiddleware
 
             if (method_exists($controller, 'getRules')) {
                 $function = explode('@',$request->route()->getActionName())[1];
-                
+
                 $request->validated = $this->validator(
                     $controller->getRules(), $function, $request
                 );
+
+                if (is_null($request->validated)) {
+                    $request->validated = $request->all();
+                }
             }
         }
 
