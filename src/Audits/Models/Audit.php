@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Models;
+namespace Clockwork\Base\Audits\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
