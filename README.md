@@ -4,7 +4,7 @@
 3. Usage
 
 ## Introduction
-When Implementing this BaseModule you will be using the repository pattern heavily. Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
+When Implementing the BaseModule you will be using the repository pattern. Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
 
 The BaseModule provides an implementation of this pattern. It contains classes and methods to build upon in an application. By implementing the module you gain access to powerful classes and methods to write code fast, clean and testable.
 
@@ -36,9 +36,7 @@ The whole implementation looks like this:
 +--------------+
 ```
 ## Installation
-```sh
-composer require 3d-ict/base-module
-```
+WIP
 
 ## Usage
 Using this module forces you to think into modules. An application is build using multiple modules working together while maintaining the DRY principle. (Don't Repeat Yourself) All modules are built upon the base module. When using the BaseModule you can access all of the 'base methods'.
@@ -71,11 +69,11 @@ Users/
 By extending the BaseController on your module's controllers you gain access to all the methods provided by the BaseController to create a simple CRUD that works (almost) straight out of the box. More on this later.
 
 ```                            
-+--------------+           +----------------+           +----------------+
-|              |  extends  |                |  extends  |                |
-|  Controller  +-----------> BaseController +----------->   Controller   |
-|              |           |                |           |                |
-+-------+------+           +----------------+           +----------------+
++------------------+           +----------------+           +----------------+
+|                  |  extends  |                |  extends  |                |
+|  UserController  +-----------> BaseController +----------->   Controller   |
+|                  |           |                |           |                |
++-------+----------+           +----------------+           +----------------+
 ```
 
 The methods accessible are:
@@ -97,12 +95,12 @@ These methods return valid JSON responses using Laravel's resource classes to al
 ##### Request validation
 To implement request validations on your controllers, simply add an array with the method names as the key and the request class as value. If no validation is required on on of the controller's methods you can define the validation class as null in the `$rules` array.
 ```php
-    protected $rules = [
+    protected array $rules = [
         'update' => UpdateRequest::class,
         'create' => null,
     ];
 ```
-In the request class we define our rules as a normal laravel request class. These rules are resolved in our BaseController and applied accordingly.
+In the request class we define our rules as a normal laravel request class. These rules are resolved in the ValidatorMiddleware and applied accordingly.
 
 ```php
 class UpdateRequest
@@ -122,7 +120,7 @@ class UpdateRequest
 }
 ```
 
-The logic handling the validations is handled by the `ValidatesRequests` trait. Where the validator method handles our validation implementation.
+The logic handling the validations is handled by the `ValidatorMiddleware`. Where the validator method handles our validation implementation.
 
 ```php
     public function validator(string $function, object $request)
@@ -135,7 +133,7 @@ The logic handling the validations is handled by the `ValidatesRequests` trait. 
     }
 ```
 #### Repositories
-Repositories are used to create methods that are reusable in the other parts of the application by doing Dependency Injection (DI). In this implementation of repositories we create an abstraction layer between our Controllers and Models, to extend and/or modify (eloquent) models.
+Repositories are classes or components that encapsulate the logic required to access data sources. In this implementation of repositories we create an abstraction layer between our Controllers and Models, to extend and/or modify (eloquent) models.
 
 The `BaseRepository` is used as a starting point for all repositories. This enables us to create and reuse methods shared by all repositories in our application.
 ```
@@ -154,27 +152,9 @@ Repositories are bound to their interfaces as a contract in the Service Provider
     );
 ```
 ##### Database Transactions
-Database transactions are applied on our queries by implementing the `Transactions` trait. When an (unhandled) exception occurs during one of the database queries the query is rolled back to prevent data corruption. To implement these transactions you must use `Transactions.php` on your repositories. When using this Trait you should be aware that the methods that you would like to use database transactions on should be of the type `private`. When omnitting the transactions you should define your methods as `public`.
-```php
-    public function __call(string $method, array $args)
-    {
-        try {
-            DB::beginTransaction();
-            // Check if the method exists on the class this trait 
-            // has been implemented in. Next we call this function.
-            $this->methodExists($method);
-            $response = call_user_func_array([$this, $method], $args);
-            DB::commit();
-        } catch (Exception $e) {
-            // If the method call throws an exception rollback the 
-            // database queries and format the exception.
-            DB::rollback();
-            throw new Exception($e->getMessage());
-        }
+Database transactions are applied automatically via middleare. When an (unhandled) exception occurs during one of the database queries the query is rolled back to prevent data corruption.
 
-        return $response;
-    }
-```
+When a request hits the middleware, the request method is detirmined. If this method is `POST`, `PUT` or `DELETE` the transactions are enabled for this request.
 ##### Repository example
 ```php
 <?php
