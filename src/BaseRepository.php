@@ -1,12 +1,12 @@
 <?php
-namespace Clockwork\Base;
+namespace IlyasDeckers\BaseModule;
 
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Clockwork\Base\Interfaces\BaseRepositoryInterface;
-use Clockwork\Base\BaseQueryBuilder;
+use IlyasDeckers\BaseModule\Interfaces\BaseRepositoryInterface;
+use IlyasDeckers\BaseModule\BaseQueryBuilder;
 
 abstract class BaseRepository extends BaseQueryBuilder implements BaseRepositoryInterface
 {

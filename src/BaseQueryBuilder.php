@@ -1,9 +1,9 @@
 <?php
-namespace Clockwork\Base;
+namespace IlyasDeckers\BaseModule;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Clockwork\Base\Interfaces\BaseQueryBuilderInterface;
+use IlyasDeckers\BaseModule\Interfaces\BaseQueryBuilderInterface;
 
 abstract class BaseQueryBuilder implements BaseQueryBuilderInterface
 {

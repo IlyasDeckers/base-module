@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Providers;
+namespace IlyasDeckers\BaseModule\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

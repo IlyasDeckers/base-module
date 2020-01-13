@@ -1,16 +1,16 @@
 {
-    "name": "3d-ict/base-module",
+    "name": "ilyasdeckers/base-module",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "authors": [
         {
             "name": "Ilyas Deckers",
-            "email": "ilyas.deckers@3d-ict.be"
+            "email": "deckersilyas@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Clockwork\\Base\\": "src/"
+            "IlyasDeckers\\BaseModule\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -32,10 +32,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Clockwork\\Base\\Providers\\AuthServiceProvider",
-                "Clockwork\\Base\\Providers\\MacroServiceProvider",
-                "Clockwork\\Base\\Providers\\BaseServiceProvider",
-                "Clockwork\\Base\\Modules\\Config\\ConfigServiceProvider"
+                "IlyasDeckers\\BaseModule\\Providers\\AuthServiceProvider",
+                "IlyasDeckers\\BaseModule\\Providers\\MacroServiceProvider",
+                "IlyasDeckers\\BaseModule\\Providers\\BaseServiceProvider",
+                "IlyasDeckers\\BaseModule\\Modules\\Config\\ConfigServiceProvider"
             ]
         }
     }

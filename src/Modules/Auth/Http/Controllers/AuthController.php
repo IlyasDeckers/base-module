@@ -1,9 +1,9 @@
 <?php
 
-namespace Clockwork\Base\Modules\Auth\Http\Controllers;
+namespace IlyasDeckers\BaseModule\Modules\Auth\Http\Controllers;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Clockwork\Base\BaseController;
+use IlyasDeckers\BaseModule\BaseController;
 use Illuminate\Http\Request;
 use Clockwork\Users\Models\User;
 use Carbon\Carbon;

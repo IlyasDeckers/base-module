@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base;
+namespace IlyasDeckers\BaseModule;
 
 use DB;
 use Route;

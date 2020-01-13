@@ -1,8 +1,8 @@
 <?php
-namespace Clockwork\Base;
+namespace IlyasDeckers\BaseModule;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Clockwork\Base\Interfaces\BaseControllerInterface;
+use IlyasDeckers\BaseModule\Interfaces\BaseControllerInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;

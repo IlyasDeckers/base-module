@@ -3,7 +3,7 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')
     ->prefix('api/v2/')
-    ->namespace('Clockwork\Base\Modules\Auth\Http\Controllers')
+    ->namespace('IlyasDeckers\BaseModule\Modules\Auth\Http\Controllers')
     ->group(function () {
         Route::get('oauth/hello', 'AuthController@hello');
     }
@@ -11,7 +11,7 @@ Route::middleware('auth:api')
 
 Route::middleware('api')
     ->prefix('api/v2/')
-    ->namespace('Clockwork\Base\Modules\Auth\Http\Controllers')
+    ->namespace('IlyasDeckers\BaseModule\Modules\Auth\Http\Controllers')
     ->group(function () {
         Route::post('oauth/forgot', 'ResetController@forgot');
         Route::post('oauth/login', 'AuthController@login');
@@ -21,7 +21,7 @@ Route::middleware('api')
 
 Route::middleware('api')
     ->prefix('api/v2/')
-    ->namespace('Clockwork\Base\Modules\Auth\Http\Controllers')
+    ->namespace('IlyasDeckers\BaseModule\Modules\Auth\Http\Controllers')
     ->group(function () {
         Route::get('/roles', 'RoleController@index');
         Route::get('/roles/{id}', 'RoleController@show');

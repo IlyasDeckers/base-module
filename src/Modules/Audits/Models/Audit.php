@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Audits\Models;
+namespace IlyasDeckers\BaseModule\Audits\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

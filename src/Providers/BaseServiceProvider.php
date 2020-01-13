@@ -1,11 +1,11 @@
 <?php
 
-namespace Clockwork\Base\Providers;
+namespace IlyasDeckers\BaseModule\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Clockwork\Base\Console\Commands\GenerateFactoriesCommand;
-use Clockwork\Base\TransactionMiddleware;
-use Clockwork\Base\ValidatorMiddleware;
+use IlyasDeckers\BaseModule\Console\Commands\GenerateFactoriesCommand;
+use IlyasDeckers\BaseModule\TransactionMiddleware;
+use IlyasDeckers\BaseModule\ValidatorMiddleware;
 
 class BaseServiceProvider extends ServiceProvider
 {

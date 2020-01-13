@@ -1,9 +1,9 @@
 <?php
 
-namespace Clockwork\Base\Modules\Config;
+namespace IlyasDeckers\BaseModule\Modules\Config;
 
 use Illuminate\Config\Repository as RepositoryBase;
-use Clockwork\Base\Modules\Config\DataWriter\Rewrite;
+use IlyasDeckers\BaseModule\Modules\Config\DataWriter\Rewrite;
 
 class Repository extends RepositoryBase
 {

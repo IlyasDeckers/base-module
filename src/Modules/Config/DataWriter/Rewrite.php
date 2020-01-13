@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Modules\Config\DataWriter;
+namespace IlyasDeckers\BaseModule\Modules\Config\DataWriter;
 
 use Exception;
 

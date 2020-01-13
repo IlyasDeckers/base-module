@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Audits\Https\Controllers;
+namespace IlyasDeckers\BaseModule\Audits\Https\Controllers;
 
 use Carbon\Carbon;
 use Clockwork\Http\Controllers\Controller;
@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 use Clockwork\Services\Upload;
 
-use Clockwork\Base\Audits\Models\Audit;
+use IlyasDeckers\BaseModule\Audits\Models\Audit;
 
 class AuditsController extends Controller
 {

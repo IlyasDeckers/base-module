@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Modules\FactoriesGenerator\Types;
+namespace IlyasDeckers\BaseModule\Modules\FactoriesGenerator\Types;
 
 use Doctrine\DBAL\Types\Type;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base\Modules\Auth\Resources;
+namespace IlyasDeckers\BaseModule\Modules\Auth\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 

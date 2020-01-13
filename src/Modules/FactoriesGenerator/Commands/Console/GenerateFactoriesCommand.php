@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Modules\FactoriesGenerator\Console\Commands;
+namespace IlyasDeckers\BaseModule\Modules\FactoriesGenerator\Console\Commands;
 
 use Doctrine\DBAL\Types\Type;
 use Illuminate\Console\Command;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Clockwork\Base\Types\EnumType;
+use IlyasDeckers\BaseModule\Types\EnumType;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;

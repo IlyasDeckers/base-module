@@ -1,8 +1,8 @@
 <?php
-namespace Clockwork\Base\Modules\Config\DataWriter;
+namespace IlyasDeckers\BaseModule\Modules\Config\DataWriter;
 
 use Illuminate\Filesystem\Filesystem;
-use Clockwork\Base\Modules\Config\DataWriter\Rewrite;
+use IlyasDeckers\BaseModule\Modules\Config\DataWriter\Rewrite;
 
 class FileWriter
 {
@@ -23,7 +23,7 @@ class FileWriter
     /**
      * The config rewriter object.
      *
-     * @var \Clockwork\Base\Config\DataWriter\Rewrite
+     * @var \IlyasDeckers\BaseModule\Config\DataWriter\Rewrite
      */
     protected $rewriter;
 
