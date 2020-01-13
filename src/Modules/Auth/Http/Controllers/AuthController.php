@@ -1,9 +1,8 @@
 <?php
 
-namespace Clockwork\Base\Auth\Http\Controllers;
+namespace Clockwork\Base\Modules\Auth\Http\Controllers;
 
 use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Facades\Clockwork\Services\Logging\Logger;
 use Clockwork\Base\BaseController;
 use Illuminate\Http\Request;
 use Clockwork\Users\Models\User;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Clockwork\Base\Config;
+namespace Clockwork\Base\Modules\Config;
 
 use Illuminate\Support\ServiceProvider;
-use Clockwork\Base\Config\DataWriter\Rewrite;
+use Clockwork\Base\Modules\Config\DataWriter\Rewrite;
 
 class ConfigServiceProvider extends ServiceProvider
 {

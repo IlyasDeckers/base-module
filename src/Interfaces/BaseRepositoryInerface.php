@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base;
+namespace Clockwork\Base\Interfaces;
 
 use Illuminate\Http\Request;
 

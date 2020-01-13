@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Console\Commands;
+namespace Clockwork\Base\Modules\FactoriesGenerator\Console\Commands;
 
 use Doctrine\DBAL\Types\Type;
 use Illuminate\Console\Command;

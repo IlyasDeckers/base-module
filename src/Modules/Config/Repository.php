@@ -1,9 +1,9 @@
 <?php
 
-namespace Clockwork\Base\Config;
+namespace Clockwork\Base\Modules\Config;
 
 use Illuminate\Config\Repository as RepositoryBase;
-use Clockwork\Base\Config\DataWriter\Rewrite;
+use Clockwork\Base\Modules\Config\DataWriter\Rewrite;
 
 class Repository extends RepositoryBase
 {

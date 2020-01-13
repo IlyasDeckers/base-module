@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base;
+namespace Clockwork\Base\Interfaces;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

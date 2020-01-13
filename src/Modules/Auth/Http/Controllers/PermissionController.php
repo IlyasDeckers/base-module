@@ -1,7 +1,7 @@
 <?php
-namespace Clockwork\Base\Auth\Http\Controllers;
+namespace Clockwork\Base\Modules\Auth\Http\Controllers;
 
-use Clockwork\Base\Auth\Resources\PermissionResource;
+use Clockwork\Base\Modules\Auth\Resources\PermissionResource;
 use Clockwork\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

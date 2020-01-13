@@ -3,6 +3,7 @@ namespace Clockwork\Base;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
+use Clockwork\Base\Interfaces\BaseQueryBuilderInterface;
 
 abstract class BaseQueryBuilder implements BaseQueryBuilderInterface
 {

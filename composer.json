@@ -35,7 +35,7 @@
                 "Clockwork\\Base\\Providers\\AuthServiceProvider",
                 "Clockwork\\Base\\Providers\\MacroServiceProvider",
                 "Clockwork\\Base\\Providers\\BaseServiceProvider",
-                "Clockwork\\Base\\Config\\ConfigServiceProvider"
+                "Clockwork\\Base\\Modules\\Config\\ConfigServiceProvider"
             ]
         }
     }

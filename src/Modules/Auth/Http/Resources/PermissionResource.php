@@ -1,9 +1,9 @@
 <?php
-namespace Clockwork\Base\Auth\Resources;
+namespace Clockwork\Base\Modules\Auth\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class RoleResource extends Resource
+class PermissionResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -15,9 +15,7 @@ class RoleResource extends Resource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'guard_name' => $this->guard_name,
-            'permissions' => PermissionResource::collection($this->whenLoaded('permissions'))
+            'name' => $this->name
         ];
     }
 }

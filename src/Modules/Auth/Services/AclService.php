@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base\Auth\Services;
+namespace Clockwork\Base\Modules\Auth\Services;
 
 class AclService
 {

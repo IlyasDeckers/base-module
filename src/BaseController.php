@@ -2,13 +2,12 @@
 namespace Clockwork\Base;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use \Illuminate\Database\Eloquent\Collection;
+use Clockwork\Base\Interfaces\BaseControllerInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\Resource;
 
-abstract class BaseController extends Controller
+abstract class BaseController extends Controller implements BaseControllerInterface
 {
     use AuthorizesRequests;
 
@@ -62,7 +61,7 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
@@ -79,7 +78,7 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
@@ -92,16 +91,21 @@ abstract class BaseController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource.
      *
      * @param  int  $id
      * @return mixed
      */
-    public function destroy(int $id)
+    public function destroy(int $id) : void
     {
         $this->model->destroy($id);
     }
 
+    /**
+     * Returns an array with the validation rules
+     * 
+     * @return array
+     */
     public function getRules() : array
     {
         return $this->rules;

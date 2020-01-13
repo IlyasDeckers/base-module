@@ -1,8 +1,8 @@
 <?php
-namespace Clockwork\Base\Config\DataWriter;
+namespace Clockwork\Base\Modules\Config\DataWriter;
 
 use Illuminate\Filesystem\Filesystem;
-use Clockwork\Base\Config\DataWriter\Rewrite;
+use Clockwork\Base\Modules\Config\DataWriter\Rewrite;
 
 class FileWriter
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Config\DataWriter;
+namespace Clockwork\Base\Modules\Config\DataWriter;
 
 use Exception;
 

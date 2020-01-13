@@ -1,17 +1,16 @@
 <?php
 namespace Clockwork\Base;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
+use Clockwork\Base\Interfaces\BaseRepositoryInterface;
+use Clockwork\Base\BaseQueryBuilder;
 
 abstract class BaseRepository extends BaseQueryBuilder implements BaseRepositoryInterface
 {
     protected $model;
-
-    // Deprecated??
-    protected Request $request;
 
     abstract public function store(Request $request) : object;
 
