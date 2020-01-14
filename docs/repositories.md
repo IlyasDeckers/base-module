@@ -140,7 +140,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         // store logic here
         return $this->itemResponse(
-            $request,
             $this->model->where('id', $result->id)
         );
     }
@@ -155,7 +154,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         // update logic here
         return $this->itemResponse(
-            $request,
             $this->model->where('id', $request->id) // or $updated->refresh()
         );
     }
