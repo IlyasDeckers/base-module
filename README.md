@@ -1,77 +1,47 @@
-# BaseModule
-1. Introduction
-2. Installation
-3. Usage
+# Laravel base module
+This package is aimed at PHP developers who like to write and organize their code in an fast and readable way. Using this package enables you to create CRUD applications while using Domain Driven Design and the repository pattern.
 
-## Introduction
-When Implementing the BaseModule you must use the repository pattern. Repositories are classes or components that encapsulate the logic required to access data sources. They centralize common data access functionality, providing better maintainability and decoupling the infrastructure or technology used to access databases from the domain model layer.
+## Why would I use it?
+Ever wondered why we recreate so much logic in Laravel? Controllers contain a lot of simmilarities, all our requests need validation, database transactions,... Why not encapsulate all this logic into a single package that handles almost everything.
 
-The BaseModule provides an implementation of this pattern. It contains classes and methods to build upon in an application. By using the module you gain access to powerful classes and methods to write code fast, clean and testable.
+## Example Controller
+In the example below we see a fully functioning `UserController` that handles everything we need from a CRUD controller in a handfull of lines. Most methods are inherited from the `BaseController`. These methods can be overwritten if needed.
 
-This module has the following traits/capabilities:
+[documentation](https://github.com/IlyasDeckers/base-module/blob/master/docs/controllers.md)
+```php
+<?php
+namespace Project\Users\Http\Controllers;
 
-- write API's fast
-- proper JSON responses
-- request validation
-- database transactions
-- minimal code
-- build upon Laravel
+use IlyasDeckers\BaseModule\BaseController;
+use Project\Users\Http\Requests\StoreRequest;
+use Project\Users\Http\Requests\UpdateRequest;
+use Project\Users\Http\Resources\UserResource;
+use Project\Users\Interfaces\UserRepositoryInterface;
 
-Using this package, it forces you to think in modules while using Domain Driven Design. An application is build using multiple modules working together while maintaining the DRY principle. (Don't Repeat Yourself) All modules are built upon the base module. When using the package you can access all of the 'base methods'.
+class UserController extends BaseController
+{
+    protected $model;
 
-The whole implementation looks like this:
+    /**
+     * Request validation rules
+     *
+     * @var array
+     */
+    protected array $rules = [
+        'store' => StoreRequest::class,
+        'update' => UpdateRequest::class,
+    ];
 
-```
-  CustomModule                  BaseModule                    Laravel
-
-+--------------+           +----------------+           +----------------+
-|              |  extends  |                |  extends  |                |
-|  Controller  +-----------> BaseController +----------->   Controller   |
-|              |           |                |           |                |
-+-------+------+           +----------------+           +----------------+
-        |
-        |
-        |
-+-------v------+           +----------------+           +------------------+
-|              |  extends  |                |           |                  |
-|  Repository  +-----------> BaseRepository |-----------> BaseQueryBuilder |
-|              |           |                |           |                  |
-+-------+------+           +----------------+           +------------------+
-        |
-        |
-        |
-+-------v------+
-|              |
-|     Model    |
-|              |
-+--------------+
-```
-
-Aside from providing the base structure and design patterns for your application it also handles authentication, factories generator and a configwriter. These functionalities can be found under `src/Modules`.
-## Installation
-WIP
-
-#### Application Structure
-Mentioned before your application will be divided into modules. As an example we will be building a simple UserModule, this module handles all user logic while maintaining as little code as possible.
-
-Begin by creating a file structure like this in your application's folder or as a new composer package. By creating a new composer package you will gain the benefit of reusing your modules in new applications, if applicable.
-
-```
-Users/
-├── Http/
-│   ├── Controllers
-│   │   └── UserController.php
-│   ├── Resources
-│   │   └── UserResource.php
-│   └── ...
-└── Interfaces/
-│   └── UserRepositoryInterface.php
-├── Model/
-│   └── User.php
-├── Providers/
-│   └── UserProvider.php
-├── Repositories/
-│   └── UserRepository.php
-└── routes.php
-
+    /**
+     * Api resource
+     *
+     * @var Clockwork\Users\Http\Resources\UserResource
+     */
+    protected $resource = UserResource::class;
+    
+    public function __construct (UserRepositoryInterface $user)
+    {
+        $this->model = $user;
+    }
+}
 ```
