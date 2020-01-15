@@ -2,6 +2,7 @@
 1. Introduction
 2. Registering repositories
 3. Database transactions
+4. BaseModule API references
 
 ## Introduction
 Repositories are classes or components that encapsulate the logic required to access data sources. With the implementation of repositories we create an abstraction layer between our Controllers and Models, to create business logic to interact with our (eloquent) models.
@@ -139,7 +140,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         // store logic here
         return $this->itemResponse(
-            $request,
             $this->model->where('id', $result->id)
         );
     }
@@ -154,7 +154,6 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         // update logic here
         return $this->itemResponse(
-            $request,
             $this->model->where('id', $request->id) // or $updated->refresh()
         );
     }
@@ -172,3 +171,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     }
 }
 ```
+## BaseModule API references
+### Properties
+
+|    access modifiers              |   property     |                | 
+|------------------|--------|----------------|
+| protected object | $model | The Model used in the class |
+
+### Methods
+
+

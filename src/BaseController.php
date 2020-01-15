@@ -1,19 +1,15 @@
 <?php
-namespace Clockwork\Base;
+namespace IlyasDeckers\BaseModule;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Clockwork\Base\Traits\Validator;
+use IlyasDeckers\BaseModule\Interfaces\BaseControllerInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller implements BaseControllerInterface
 {
-    use AuthorizesRequests, 
-        DispatchesJobs, 
-        ValidatesRequests,
-        Validator;
+    use AuthorizesRequests;
 
     /**
      * Model being used by the controller
@@ -37,7 +33,7 @@ class BaseController extends Controller
      *
      * @var array
      */
-    protected $rules = [];
+    protected array $rules = [];
 
     /**
      * Display a listing of the resource.
@@ -65,54 +61,53 @@ class BaseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
     public function store(Request $request) : object
     {
-        // Validate the incomming request
-        $this->validator(__FUNCTION__, $request);
-
-        // Store the resource
         $result = $this->model->store($request);
 
-        // Check if the result is an instance  of Collection. 
         if ($result instanceof Collection) {
-            // Return a collection resource.
             return $this->resource::collection($result);
         }
 
-        // Return   an item.
         return new $this->resource($result);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return mixed
      */
     public function update(Request $request) : object
     {
-        // Validate the incomming request.
-        $this->validator(__FUNCTION__, $request);
-
-        // Update model and return the updated model.
         return new $this->resource(
-            $this->model->update($request)
+            $this->model->update($request->validated)
         );
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource.
      *
      * @param  int  $id
      * @return mixed
      */
-    public function destroy(int $id)
+    public function destroy(int $id) : void
     {
         $this->model->destroy($id);
+    }
+
+    /**
+     * Returns an array with the validation rules
+     * 
+     * @return array
+     */
+    public function getRules() : array
+    {
+        return $this->rules;
     }
 }

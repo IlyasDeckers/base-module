@@ -1,6 +1,6 @@
 <?php
 
-namespace Clockwork\Base\Auth\Http\Controllers;
+namespace IlyasDeckers\BaseModule\Modules\Auth\Http\Controllers;
 
 use Clockwork\Http\Controllers\Controller;
 use Illuminate\Http\Request;

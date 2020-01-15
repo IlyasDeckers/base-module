@@ -1,5 +1,5 @@
 <?php
-namespace Clockwork\Base\Traits;
+namespace IlyasDeckers\BaseModule\Traits;
 
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\Factory;

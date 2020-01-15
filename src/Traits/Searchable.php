@@ -1,5 +1,5 @@
 <?php 
-namespace Clockwork\Base\Traits;
+namespace IlyasDeckers\BaseModule\Traits;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Config;
